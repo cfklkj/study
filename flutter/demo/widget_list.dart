@@ -63,9 +63,41 @@ class User  {
 
  
 
-List<User> users = new List.generate(50, (i) => new User('xiaobai $i', 'index $i'));
+ 
+
+UserMgr user = new UserMgr();
 
  
+
+class UserMgr {
+
+  List<User> users = new List.generate(50, (i) => new User('xiaobai $i', 'index $i'));
+
+  var userChoice = List();
+
+  void addChoice(int index){
+
+    userChoice.add(index);
+
+  }
+
+  void delChoice(int index){
+
+    userChoice.remove(index);
+
+  }
+
+  int getChoiceLenth(){
+
+    print("lenth");
+
+    print(userChoice.length);
+
+     return userChoice.length;
+
+  }
+
+}
 
 //--main
 
@@ -173,9 +205,17 @@ class VUserList extends State<UserListWidge>  {
 
       print("setState");
 
-      print(users[index].name);
+      user.users[index].setSelect();
 
-      users[index].setSelect();
+      if (user.users[index].IsSelect() == true){
+
+        user.addChoice(index);
+
+      }else{
+
+        user.delChoice(index);
+
+      }
 
     });
 
@@ -201,15 +241,15 @@ class VUserList extends State<UserListWidge>  {
 
       body:  new ListView.builder(
 
-        itemCount: users.length,
+        itemCount: user.users.length,
 
         itemBuilder: (context, index) {
 
           return  new ListTile(
 
-             title: new Text(users[index].name),
+            title: new Text(user.users[index].name),
 
-             leading:  new Icon( users[index].icons()),
+            leading:  new Icon( user.users[index].icons()),
 
             onTap: (){
 
@@ -257,11 +297,15 @@ class HUserList extends State<UserChoiceListWidge>  {
 
     setState(() {
 
+      var userIndex =  user.userChoice[index];
+
       print("setState");
 
-      print(users[index].name);
+      print(user.users[userIndex].name);
 
-      users[index].setSelect();
+      user.delChoice(userIndex);
+
+      user.users[userIndex].setSelect();
 
     });
 
@@ -289,7 +333,7 @@ class HUserList extends State<UserChoiceListWidge>  {
 
           scrollDirection: Axis.horizontal,
 
-          itemCount: users.length,
+          itemCount: user.getChoiceLenth(),
 
           itemBuilder: (context, index) {
 
@@ -305,7 +349,7 @@ class HUserList extends State<UserChoiceListWidge>  {
 
                   },
 
-                  child: Icon(users[index].icons()),
+                  child: Icon(user.users[user.userChoice[index]].icons()),
 
                 )
 
