@@ -56,10 +56,15 @@ class User  {
   }
 
 }
+
+ 
+
  
 
 List<User> users = new List.generate(50, (i) => new User('xiaobai $i', 'index $i'));
+
  
+
 void main() {
 
   runApp(
@@ -68,7 +73,7 @@ void main() {
 
         title: 'list',
 
-        home: UserListWidge(),
+        home: UserChoiceListWidge(),
 
   ));
 
@@ -76,7 +81,7 @@ void main() {
 
  
 
-class UserListWidge extends StatefulWidget {
+class UserChoiceListWidge extends StatefulWidget {
 
   @override
 
@@ -88,7 +93,7 @@ class UserListWidge extends StatefulWidget {
 
  
 
-class UserList extends State<UserListWidge>  {
+class UserList extends State<UserChoiceListWidge>  {
 
   void changeLeading(int index) {
 
@@ -118,23 +123,29 @@ class UserList extends State<UserListWidge>  {
 
       body:  new ListView.builder(
 
+        scrollDirection: Axis.horizontal,
+
         itemCount: users.length,
 
-        itemBuilder: (context, index) {
+        itemBuilder: (context, index) { 
 
-          return  new ListTile(
+          return Container(color: Colors.white ,margin: EdgeInsets.only(top: 10),width: 80,height: 40,
 
-             title: new Text(users[index].name),
+            child:  GestureDetector(
 
-             leading:  new Icon( users[index].icons()),
-
-            onTap: (){
+              onTap: (){
 
               this.changeLeading(index);
 
-            },
+              },
 
-           );
+              child: Icon(users[index].icons()),
+
+            )
+
+          );
+
+ 
 
         },
 
