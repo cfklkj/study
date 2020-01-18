@@ -15,5 +15,6 @@ public:
 
 	void setBodyRect(int W, int H);
 	void fullBodyRect(CWnd*pWnd); 
+	void resizeRect(CWnd*pWnd, int x, int y);
 };
 

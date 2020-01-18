@@ -33,7 +33,7 @@ public:
 
 // ÌØÐÔ
 public:
-
+	int  m_nHitTest;
 // ²Ù×÷
 public:
 
@@ -385,8 +385,6 @@ public:
 		static BYTE parms[] = VTS_BOOL ;
 		InvokeHelper(0x22c, DISPATCH_PROPERTYPUT, VT_EMPTY, nullptr, parms, newValue);
 	}
-
-
-	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	 
 	DECLARE_MESSAGE_MAP() 
 };

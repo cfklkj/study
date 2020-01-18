@@ -16,7 +16,7 @@ https://bbs.csdn.net/topics/350250241 --屏蔽右键
 #define new DEBUG_NEW
 #endif
 
-
+#define WM_USER_size WM_USER+100
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -70,6 +70,7 @@ BEGIN_MESSAGE_MAP(Cweb3Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -103,11 +104,12 @@ BOOL Cweb3Dlg::OnInitDialog()
 	//  执行此操作
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
-
+	ModifyStyle(0, WS_CLIPCHILDREN);
 	// TODO: 在此添加额外的初始化代码
 	POS->setBodyRect(512, 875);
 	POS->fullBodyRect(&m_web);
 	COleVariant varEmpty;
+	//CString str("http://loan.guiruntang.club");
 	CString str("http://loan.guiruntang.club");
 	COleVariant varUrl(str);
 	m_web.Navigate2(varUrl, varEmpty, varEmpty, varEmpty, varEmpty); 
@@ -164,3 +166,129 @@ HCURSOR Cweb3Dlg::OnQueryDragIcon()
 }
 
 
+
+
+BOOL Cweb3Dlg::PreTranslateMessage(MSG* pMsg)
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	// TODO: 在此添加专用代码和/或调用基类
+	if (WM_RBUTTONDOWN == pMsg->message || WM_LBUTTONDBLCLK == pMsg->message)
+	{
+		return TRUE;
+	}
+	if (WM_MOUSEMOVE == pMsg->message)
+	{
+		CPoint point = (pMsg->pt);
+		ScreenToClient(&point);
+		CRect rect;
+		GetClientRect(&rect);
+		if (point.x <= rect.left + 3)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE)));
+			m_nHitTest = HTLEFT;
+		}
+		else if (point.x >= rect.right - 3)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE)));
+			m_nHitTest = HTRIGHT;
+		}
+		else if (point.y <= rect.top + 3)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS)));
+			m_nHitTest = HTTOP;
+		}
+		else if (point.y >= rect.bottom - 3)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS)));
+			m_nHitTest = HTBOTTOM;
+		}
+		else if (point.x <= rect.left + 5 && point.y <= rect.top + 5)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENWSE)));
+			m_nHitTest = HTTOPLEFT;
+		}
+		else if (point.x >= rect.right - 5 && point.y <= rect.top + 5)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENESW)));
+			m_nHitTest = HTTOPRIGHT;
+		}
+		else if (point.x <= rect.left + 5 && point.y >= rect.bottom - 5)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENESW)));
+			m_nHitTest = HTBOTTOMLEFT;
+		}
+		else if (point.x >= rect.right - 5 && point.y >= rect.bottom - 5)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENWSE)));
+			m_nHitTest = HTBOTTOMRIGHT;
+		}
+		else
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_ARROW)));
+			m_nHitTest = 0;
+		}
+	} 
+	if (WM_LBUTTONDOWN == pMsg->message)
+	{
+		if (m_nHitTest == 0) {
+			return CDialogEx::PreTranslateMessage(pMsg);
+		}
+		CPoint point = pMsg->pt;
+		if (m_nHitTest == HTTOP)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS)));  
+			 SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_TOP, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTBOTTOM)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOM, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTLEFT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_LEFT, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTRIGHT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZEWE))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_RIGHT, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTTOPLEFT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENWSE))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_RIGHT, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTTOPRIGHT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENESW))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_RIGHT, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTBOTTOMLEFT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENESW))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOMLEFT, MAKELPARAM(point.x, point.y)); 
+		}
+		else if (m_nHitTest == HTBOTTOMRIGHT)
+		{
+			SetCursor(LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENWSE))); 
+			SendMessage(WM_SYSCOMMAND, SC_SIZE | WMSZ_BOTTOMRIGHT, MAKELPARAM(point.x, point.y)); 
+		}
+		else
+		{ 
+			//实现对话框跟随鼠标移动 
+			PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(pMsg->pt.x, pMsg->pt.y));   //---移动当前   
+		} 
+	}
+	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+
+void Cweb3Dlg::OnSize(UINT nType, int cx, int cy)
+{
+	CDialogEx::OnSize(nType, cx, cy);
+
+	// TODO: 在此处添加消息处理程序代码
+	POS->fullBodyRect(&m_web);
+}

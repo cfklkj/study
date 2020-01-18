@@ -13,6 +13,7 @@ class Cweb3Dlg : public CDialogEx
 public:
 	Cweb3Dlg(CWnd* pParent = nullptr);	// 标准构造函数
 
+	int  m_nHitTest;
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_WEB3_DIALOG };
@@ -34,4 +35,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CWebBrowser2 m_web;
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

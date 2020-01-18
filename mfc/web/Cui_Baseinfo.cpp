@@ -28,8 +28,23 @@ void CBaseInfo_ui::setBodyRect(int X, int Y)
 
 void CBaseInfo_ui::fullBodyRect(CWnd*pWnd)
 {
+	if (pWnd->m_hWnd == NULL) {
+		return;
+	}
 	HWND hwnd = AfxGetApp()->GetMainWnd()->GetSafeHwnd();   //获取主窗口句柄 
 	CRect old; 
-	GetWindowRect(hwnd, old); 
-	pWnd->MoveWindow(old, true); 
+	GetWindowRect(hwnd, old);  
+	old.right = old.right - old.left;
+	old.bottom = old.bottom - old.top;
+	old.left = old.top = 0;
+	pWnd->MoveWindow(old);  
+}
+
+void CBaseInfo_ui::resizeRect(CWnd * pWnd, int x, int y)
+{
+	CRect old;
+	pWnd->GetWindowRect(old);
+	old.right += y;
+	old.bottom += x;
+	pWnd->MoveWindow(old);
 }
