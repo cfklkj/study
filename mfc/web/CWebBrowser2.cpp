@@ -21,5 +21,16 @@ BOOL CWebBrowser2::PreTranslateMessage(MSG* pMsg)
 	{ 
 		return TRUE;
 	}
+	if (WM_LBUTTONDOWN == pMsg->message)
+	{
+		//PostMessage(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(pMsg->pt.x, pMsg->pt.y));   //---移动当前 
+		AfxGetApp()->GetMainWnd()->PostMessageW(WM_NCLBUTTONDOWN, HTCAPTION, MAKELPARAM(pMsg->pt.x, pMsg->pt.y));  //--移动父窗体
+		return TRUE;
+	}
 	return CWnd::PreTranslateMessage(pMsg);
 }
+BEGIN_MESSAGE_MAP(CWebBrowser2, CWnd)
+	ON_WM_LBUTTONDOWN()
+END_MESSAGE_MAP()
+
+ 
