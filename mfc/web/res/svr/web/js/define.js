@@ -1,0 +1,11 @@
+var defines = defines || {};
+var imDefine = defines.Method = {  
+	Opt_login:110011,
+	Opt_msg:110005,
+	Opt_heart:110013,
+	Opt_revmsg:120004,
+	Err_reLogin:140022,
+	Conversation_c2c:130003,
+	Err_null:200
+}
+ 
