@@ -1,6 +1,6 @@
 var LoginDiv = LoginDiv || {};
 var inDiv = LoginDiv.Method = { 
-    div_login:'Login',
+    div_login:'Login', 
     showLogin:function(){
         eleBody = util.getEleById("bodys");
         util.clearElement(eleBody);
@@ -14,7 +14,7 @@ var inDiv = LoginDiv.Method = {
     },
     resLogins:function(msg){  
         data = JSON.parse(msg.Data)
-        if (data.code == 200){
+        if (data.code == 200){ 
             imSocket.connect("ws://122.51.33.81:10031/v1/tzj", data.data.userid, data.data.sign, data.data.appid)
         }
         console.debug(JSON.parse(msg.Data)) 

@@ -1,7 +1,10 @@
 
+.div-left{ float:left;width:29%;border:1px solid #F00} 
+.div-right{ float:right;width:69%;border:1px solid #000} 
+
 .talk_con{
-    width:600px;
-    height:500px;
+    width:920px;
+    height:700px;
     border:1px solid #666;
     margin:50px auto 0;
     background:#f9f9f9;
@@ -11,12 +14,12 @@
     height:420px;
     border:1px solid #666;
     background:#fff;
-    margin:10px auto 0;
+    margin:3px auto 0;
     overflow:auto;
 }
 .talk_input{
     width:580px;
-    margin:10px auto 0;
+    margin:5px auto 0;
 }
 .whotalk{
     width:80px;
@@ -25,19 +28,18 @@
     outline:none;
 }
 .talk_word{
-    width:420px;
-    height:26px;
+    width:100%;
+    height:96px;
     padding:0px;
-    float:left;
-    margin-left:10px;
+    float:left; 
     outline:none;
     text-indent:10px;
 }        
 .talk_sub{
     width:56px;
     height:30px;
-    float:left;
-    margin-left:10px;
+    float: right;;
+    margin-right:10px;
 }
 .atalk{
     margin:10px; 
@@ -60,3 +62,36 @@
     color:#fff;
     padding:5px 10px;
 } 
+.messageContent {
+    border: 1px solid #453321;
+    width: 300px;
+    height: 560px;
+    display: block; 
+    border-radius: 3px;
+    background: #93775d; 
+    color: #fff;
+    font-size: 14px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.messageContent p {
+    border-bottom: 1px dashed #d09c6b;
+    padding: 10px 0;
+    overflow-x: hidden;
+}
+.messageContent p img {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ff9b67;
+    border-radius: 5px;
+    margin-right: 10px;
+    float: left;
+}
+.messageContent p span {
+    float: left;
+    display: inline;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #fff3e7;
+}

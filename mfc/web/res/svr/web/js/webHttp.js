@@ -1,7 +1,6 @@
 var imHttp = imHttp || {};
 var doHttp = imHttp.Method = {  
-    checkData: function(res){
-        alert("hello")
+    checkData: function(res){ 
         data = JSON.parse(res)
         if (data == null || data.Code != 200) {        
             alert(data, res) 
@@ -29,7 +28,7 @@ var doHttp = imHttp.Method = {
                 {
                     window.location.reload();
                 }else
-                    alert("111" + xhr.responseText);
+                    alert(xhr.responseText);
             }else{
                 console.debug("request error", xhr.status);
             }

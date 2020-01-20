@@ -1,24 +1,24 @@
 var Socket = Socket || {};
 var imSocket = Socket.Method = { 
     ws:null,  
-    name:"",
+    loginUser:"", 
     hearMsg:function(){
         msg = {"Operation":imDefine.Opt_heart, "Body":{}}
         return JSON.stringify(msg)
     },
     loginMsg:function(userid, userSig, appid){
        msg = {"Operation":imDefine.Opt_login, "Body":{ "UserId":userid,"UserSig" : userSig,"AppId" : appid }}
-       name = userid;
+       imSocket.loginUser = userid;
        return JSON.stringify(msg)
     },
     tallMsg:function(toUser, data){
         body = {"Type":"txt","Desc":"","Data":data,"Ext":""}
         msg = {"Operation":imDefine.Opt_msg, "Body":{"ConverstaionType":imDefine.Conversation_c2c,"ConverstaionId":toUser,"MsgId":0,"Rand":0,"Time":0,"IsSelf":false,"Status":0,"Sender":"","TIMElemet":[body]}}
-        return JSON.stringify(msg)
+        return JSON.stringify(msg), body
     },
-    send:function(toUser, msg){
+    send:function(msg){
             //发送文本
-        ws.send(imSocket.tallMsg(toUser, msg)); 
+        ws.send(msg); 
     },
     connect:function(url, user, sig, appid){   //"ws://localhost:8080/msg"
         
@@ -33,7 +33,7 @@ var imSocket = Socket.Method = {
         //【用于指定连接成功后的回调函数】
         ws.onopen = function (evt) {
             console.log("Connection open ...");
-            ws.send(imSocket.loginMsg(user, sig, appid));
+            ws.send(imSocket.loginMsg(user, sig, appid)); 
         };
         //ws.addEventListener('open', function (event) {
         //    ws.send('Hello Server!');
@@ -50,14 +50,14 @@ var imSocket = Socket.Method = {
             console.log( data);
             if(data.Body.Status == imDefine.Err_null) {
                 if( data.Operation == imDefine.Opt_login){
-                    chat.showChat();
+                    chat.showChat(); 
                     return
                 }
             }
             if (data.Operation == imDefine.Opt_msg){
             }
             if (data.Operation == imDefine.Opt_revmsg){
-                chat.addMsg(data.Body.Sender, data.Body.TIMElemet[0]) 
+                chat.addContent(data.Body.Sender, data.Body.TIMElemet[0])
             }
         };
         
