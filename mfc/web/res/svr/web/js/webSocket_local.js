@@ -58,17 +58,12 @@ var localSocket = lSocket.Method = {
                 data = JSON.parse(data.Data.Data)
                 chat.addMsg(data.Sender, data, true)
             } 
-            console.log("ddd",data)
             if (data.Code == imDefine.Act_msgLen){
+                console.log("dddsss",data)
                 logLength = data.Data.Index 
-                for ( i = logLength; i > 0; i--)
-                {
-                    if (i + 17 == logLength) {
-                        break
-                    }
-                    localSocket.send(localSocket.mkReadMsg(user, i));
-                    actRecords.add(imDefine.act_selectContentLogLenth, i - 1 ); 
-                }
+                actRecords.add(imDefine.act_selectContentLogLenth, logLength); 
+                chat.chat_logFirst = true;
+                chat.upLog(); 
             }
         };
         

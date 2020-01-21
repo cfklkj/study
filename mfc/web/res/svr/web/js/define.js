@@ -11,7 +11,10 @@ var imDefine = defines.Method = {
 	Conversation_c2c:130003,
     Err_null:200,
     act_selectContent:"selectContent",
-    act_selectContentLogLenth:"selectContentLog"
+	act_selectContentLogLenth:"selectContentLog",
+	chat_chat:"chat",
+	chat_img:"image",
+	mem_loginData:"loginData"
 }
 
  

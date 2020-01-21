@@ -80,6 +80,21 @@ var util = flyUtil.commonMethod  = {
     ele = util.getEleById(id)
     ele.setAttribute("onscroll",callBack); 
    },
+   getScrollTop:function(){
+        var scrollTop = 0, bodyScrollTop = 0, documentScrollTop = 0;
+        if(document.body){
+            bodyScrollTop = document.body.scrollTop;
+        }
+        if(document.documentElement){
+            documentScrollTop = document.documentElement.scrollTop;
+        }
+        scrollTop = (bodyScrollTop - documentScrollTop > 0) ? bodyScrollTop : documentScrollTop;
+        return scrollTop;
+    },
+    addEvt:function(id, event, callBack){
+        ele = util.getEleById(id)
+        ele.setAttribute(event,callBack);   
+    },
    //添加方法
     addEvent: function(id, callBack){ 
         ele = util.getEleById(id)

@@ -1,7 +1,7 @@
 var Socket = Socket || {};
 var imSocket = Socket.Method = { 
     ws:null,  
-    loginUser:"", 
+    loginUser:"",  
     hearMsg:function(){
         msg = {"Operation":imDefine.Opt_heart, "Body":{}}
         return JSON.stringify(msg)
@@ -9,17 +9,16 @@ var imSocket = Socket.Method = {
     loginMsg:function(userid, userSig, appid){
        msg = {"Operation":imDefine.Opt_login, "Body":{ "UserId":userid,"UserSig" : userSig,"AppId" : appid }}
        imSocket.loginUser = userid;
-       return JSON.stringify(msg)
+       ws.send(JSON.stringify(msg)) 
     },
-    tallMsg:function(toUser, data){
-        body = {"Type":"txt","Desc":"","Data":data,"Ext":""}
+    tallMsg:function(toUser, data, dataType){
+        dataMsg = {"type":dataType, "content":data}
+        body = {"Type":"txt","Desc":"","Data": JSON.stringify(dataMsg),"Ext":""}
         msg = {"Operation":imDefine.Opt_msg, "Body":{"ConverstaionType":imDefine.Conversation_c2c,"ConverstaionId":toUser,"MsgId":0,"Rand":0,"Time":0,"IsSelf":false,"Status":0,"Sender":"","TIMElemet":[body]}}
-        return JSON.stringify(msg), body
-    },
-    send:function(msg){
-            //发送文本
-        ws.send(msg); 
-    },
+        console.log(JSON.stringify(msg))
+        ws.send(JSON.stringify(msg))
+        return body
+    }, 
     connect:function(url, user, sig, appid){   //"ws://localhost:8080/msg"
         
         ws = new WebSocket(url);
@@ -31,9 +30,8 @@ var imSocket = Socket.Method = {
         //例如：if (ws.readyState == WebSocket.CONNECTING) { }
         
         //【用于指定连接成功后的回调函数】
-        ws.onopen = function (evt) {
-            console.log("Connection open ...");
-            ws.send(imSocket.loginMsg(user, sig, appid)); 
+        ws.onopen = function (evt) { 
+            imSocket.loginMsg(user, sig, appid); 
         };
         //ws.addEventListener('open', function (event) {
         //    ws.send('Hello Server!');

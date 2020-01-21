@@ -106,13 +106,16 @@ BOOL Cweb3Dlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 	ModifyStyle(0, WS_CLIPCHILDREN);
 	// TODO: 在此添加额外的初始化代码
-	POS->setBodyRect(512, 875);
+	//CString str("http://loan.guiruntang.club");
+	//POS->setBodyRect(512, 875);
+
+	CString str("http://127.0.0.1:20011");
+	POS->setBodyRect(830, 500);
+
 	POS->fullBodyRect(&m_web);
 	COleVariant varEmpty;
-	//CString str("http://loan.guiruntang.club");
-	CString str("http://loan.guiruntang.club");
 	COleVariant varUrl(str);
-	m_web.Navigate2(varUrl, varEmpty, varEmpty, varEmpty, varEmpty); 
+	m_web.Navigate2(varUrl, varEmpty, varEmpty, varEmpty, varEmpty);  
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 

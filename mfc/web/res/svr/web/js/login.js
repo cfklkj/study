@@ -1,6 +1,6 @@
 var LoginDiv = LoginDiv || {};
 var inDiv = LoginDiv.Method = { 
-    div_login:'Login', 
+    div_login:'Login',  
     showLogin:function(){
         eleBody = util.getEleById("bodys");
         util.clearElement(eleBody);
@@ -10,11 +10,12 @@ var inDiv = LoginDiv.Method = {
         util.addEvent("logins", "inDiv.logins()");
     },
     logins:function(){
-        doHttp.getLoginInfo("http://134.175.145.46:8030/im/info", "admin", "123456",this.resLogins)
+        doHttp.getLoginInfo("http://134.175.145.46:8025/im/info", "user01", "123456",this.resLogins)
     },
     resLogins:function(msg){  
         data = JSON.parse(msg.Data)
         if (data.code == 200){ 
+            memHash.add(imDefine.mem_loginData, data.data)
             imSocket.connect("ws://122.51.33.81:10031/v1/tzj", data.data.userid, data.data.sign, data.data.appid)
         }
         console.debug(JSON.parse(msg.Data)) 

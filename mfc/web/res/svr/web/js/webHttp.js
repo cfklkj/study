@@ -9,6 +9,23 @@ var doHttp = imHttp.Method = {
             return data
         }      
     },
+    requestProx: function(GOrP, URL, formData, callBack){ 
+        var xhr = new XMLHttpRequest();
+        xhr.open(GOrP, URL, true); 
+        xhr.send(formData);  
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) { // 读取完成
+                if (xhr.status == 200) {  
+                       callBack(xhr.responseText) 
+                       return
+                }
+            }
+            if(xhr.status == 500){
+                callBack(xhr.responseText) 
+            } 
+            console.log("req-rst", xhr.status, xhr.response)
+        }
+    },
     request: function(GOrP, URL, data, callBack){ 
         var xhr = new XMLHttpRequest();
         xhr.open(GOrP, URL, true); 
@@ -39,6 +56,6 @@ var doHttp = imHttp.Method = {
         body = 'username=' +userName+ "&password=" +password + '';
         var data =  {"Url":url, "Data":body, "ContentType":"application/x-www-form-urlencoded;"}   
         this.request("post","/prox", JSON.stringify(data), resFunc)  
-    },  
+    }
 }
  

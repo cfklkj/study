@@ -1,6 +1,9 @@
 var layoutChat = layoutChat || {};
 var chat = layoutChat.Method = { 
     div_chat:'chat',
+    chat_isUp:false,
+    chat_logFirst:false,
+    chat_words:null,
     showChat:function(){
         eleBody = util.getEleById("bodys");
         util.clearElement(eleBody);
@@ -9,12 +12,22 @@ var chat = layoutChat.Method = {
         util.addElement(login, chatHtml); 
         util.addEvent("talksub", "chat.sendMsg()");  
         util.addScrollEvt("words", "chat.upLog(this)");
-    },
-    upLog:function(event){
-        console.log("upLo-g", event)
-        return
-        if (event.scrollTop == 0){ 
-            logLength = actRecords.get(imDefine.act_selectContentLogLenth); 
+        util.addEvent("fileUpdate-button", "imgDlg.openDlg()")
+        util.addEvt("file-button", "onchange", "imgDlg.changes(this)")
+        this.chat_words = util.getEleById("words")
+    }, 
+    upLog:function(event){ 
+        if ( this.chat_logFirst || event.scrollTop == 0){  
+            this.chat_logFirst = false
+            logLength = actRecords.get(imDefine.act_selectContentLogLenth);
+            if (logLength < 1) {
+                return
+            }  
+            if(this.chat_isUp)
+            {
+                return
+            }
+            this.chat_isUp = true
             user = actRecords.get(imDefine.act_selectContent);
             for ( i = logLength; i > 0; i--)
             {
@@ -24,36 +37,56 @@ var chat = layoutChat.Method = {
                 localSocket.send(localSocket.mkReadMsg(user, i));
                 actRecords.add(imDefine.act_selectContentLogLenth, i - 1); 
             }
+            this.chat_isUp = false
         }
     },
-    sendMsg:function(){
-        msgData = util.getEleValue("talkwords") 
-        if (msgData == "") {
-            return
-        }
-        user = actRecords.get(imDefine.act_selectContent)
-        if (user == null){
-            user = "7a57a5a743894a0e"
-        }
-        msg, data = imSocket.tallMsg(user, msgData)
-        imSocket.send(msg)
+    send:function(user, msgData, dataType){
+        data = imSocket.tallMsg(user, msgData, dataType) 
         chat.addMsg(imSocket.loginUser, data)
         data.Sender = imSocket.loginUser
         localSocket.send(localSocket.mkSetMsg(user, data))
     },
+    sendMsg:function(){ 
+        user = actRecords.get(imDefine.act_selectContent)
+        if (user == null){
+            //user = "7a57a5a743894a0e"
+            return false
+        }
+        msgData = util.getEleValue("talkwords") 
+        if (msgData == "") {
+            return
+        }
+        chat.send(user, msgData, imDefine.chat_chat)
+    },
     addMsg:function(sender, jsData, isLog){ 
         //data.Sender, data.Type, data.Data 
+        body = JSON.parse(jsData.Data)
+        htmls = ""
+        switch(body.type){
+            case imDefine.chat_chat:
+                htmls = body.content;
+                break;
+            case imDefine.chat_img:
+                htmls = '<img alt="" src=' + body.content + '></img>'
+                break; 
+        }
+        if (htmls == "")
+        {
+            return
+        }
         if (sender == imSocket.loginUser)
         {
-            str = '<div class="btalk"><span>B说 :' + jsData.Data +'</span></div>'; 
+            str = '<div class="btalk"><span>' + htmls +'</span></div>'; 
         }else{
-            str = '<div class="atalk"><span>A说 :' + jsData.Data +'</span></div>';
+            str = '<div class="atalk"><span>' + htmls +'</span></div>';
         }
         var Words = document.getElementById("words");
         if (isLog) {   //逆
             Words.innerHTML = str + Words.innerHTML; 
+            this.chat_words.scrollTop = this.chat_words.scrollHeight /2
         }else{   //正
              Words.innerHTML = Words.innerHTML + str;
+             this.chat_words.scrollTop = this.chat_words.scrollHeight 
         }
     }, 
     altContent_msg:function(user, msg){
@@ -100,18 +133,7 @@ var chat = layoutChat.Method = {
 
 
 }
-
-// window.onscroll = function (){
-//     var marginBot = 0;
-//     if (document.documentElement.scrollTop){
-//     marginBot = document.documentElement.scrollHeight – (document.documentElement.scrollTop+document.body.scrollTop)-document.documentElement.clientHeight;
-//     } else {
-//     marginBot = document.body.scrollHeight – document.body.scrollTop- document.body.clientHeight;
-//     }
-//     if(marginBot<=0) {
-//     //do something
-//     }
-//     }
+ 
 var chatHtml='<div class="talk_con">\
 <div class="div-left"><div class="messageContent" id="msgContent"></div></div>\
 <div class="div-right">\
@@ -121,6 +143,10 @@ var chatHtml='<div class="talk_con">\
 </div>\
 <div class="talk_input">\
     <textarea class="talk_word" id="talkwords"></textarea>\
+    <input type="file" id="file-button" style="display: none;" name="qiniuPic" accept="image/*" >\
+    <div class="file_scan" style="width: 100px;float: left; margin-top: 20px;" id="fileUpdate-button">\
+        添加浏览\
+    </div>\
     <input type="button" value="发送" class="talk_sub" id="talksub">\
 </div>\
 </div>\

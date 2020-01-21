@@ -6,6 +6,7 @@ document.write('<script  type="text/javascript" src="js/websocket.js"></script>'
 document.write('<script  type="text/javascript" src="js/websocket_local.js"></script>') 
 document.write('<script  type="text/javascript" src="js/define.js"></script>')  
 document.write('<script  type="text/javascript" src="js/chats.js"></script>')  
+document.write('<script  type="text/javascript" src="js/imgDlg.js"></script>')   
 window.onload = main 
 
 function main(){
