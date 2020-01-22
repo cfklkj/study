@@ -8,8 +8,8 @@ import (
 
 //-------config.jso  ------
 type ConfigInfo struct {
-	HttpIpPort  string `json:"httpPort"`
-	DefaultHtml string `json:"DefaultHtml"`
+	WebSocket string `json:""`
+	SvrUrl    string
 }
 
 type Config struct {
@@ -19,8 +19,8 @@ type Config struct {
 
 func makeInfo() ConfigInfo {
 	var info ConfigInfo
-	info.HttpIpPort = "127.0.0.1:20010"
-	info.DefaultHtml = "kefu.html"
+	info.WebSocket = "localhost:10023"
+	info.SvrUrl = "http://134.175.145.46:8025/im/info"
 	return info
 }
 
@@ -36,7 +36,7 @@ func NewConfig() *Config {
 
 //初始化配置
 func (c *Config) Init() {
-	key := "my_http"
+	key := "localIm"
 	if !c.cf.GetConfigInfo(key, &c.info) {
 		c.cf.SetConfigInfo(key, &c.info)
 	}

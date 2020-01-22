@@ -1,0 +1,103 @@
+
+.chat_r_t{
+    width:100%;
+    height:56px;
+    opacity:0.6;
+    border-radius:0 15px 0 0;
+} 
+.chat_r_t i{
+    width:100%;
+    height:0px;
+    border:1px solid rgba(224,221,225,1);
+    opacity:1;
+}
+ 
+
+#chat_r_m{
+    width:100%;
+    height:513px;
+    border:1px solid #666;
+    background:rgba(243,241,243,1);
+    margin:4px auto 0;
+    overflow:auto;
+}
+
+#chat_r_b{
+    width:100%;  
+    height: 200px;
+    display: block; 
+    background: rgba(253,254,255,1); 
+    color: #fff;
+    font-size: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius:0 0 15px 0;
+}
+  
+#chat_r_b span[index="1"] img{
+    margin-top: 12px;
+    margin-left: 25px;
+    width: 26px;
+    height: 26px;
+}
+
+#talkwords{
+    margin-left: 25px;
+    width:514px;   
+    height:106px;
+    padding:0px;
+    float:left; 
+    outline:none;
+    text-indent:10px;
+    border:none;  
+}
+
+#talksub{
+    width:56px;
+    height:30px;
+    float: right;;
+    margin-right:28px;
+}
+.talk_con{
+    width:920px;
+    height:700px;
+    border:1px solid #666;
+    margin:50px auto 0;
+    background:#f9f9f9;
+}
+
+.whotalk{
+    width:80px;
+    height:30px;
+    float:left;
+    outline:none;
+}       
+.atalk{
+    margin:10px; 
+}
+.atalk span{
+    display:inline-block;
+    background:#0181cc;
+    border-radius:10px;
+    color:#fff;
+    padding:5px 10px;
+}
+.btalk{
+    margin:10px;
+    text-align:right;
+}
+.btalk span{
+    display:inline-block;
+    background:#ef8201;
+    border-radius:10px;
+    color:#fff;
+    padding:5px 10px;
+} 
+.atalk span img{
+    width: 86px;
+    height: 86px;
+}
+.btalk span img{
+    width: 86px;
+    height: 86px;
+}

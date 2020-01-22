@@ -62,14 +62,15 @@ var imSocket = Socket.Method = {
             console.log( data);
             if(data.Body.Status == imDefine.Err_null) {
                 if( data.Operation == imDefine.Opt_login){
-                    chat.showChat(); 
+                    inDiv.showMain();
+                   // chat.showChat(); 
                     return
                 }
             }
             if (data.Operation == imDefine.Opt_msg){
             }
             if (data.Operation == imDefine.Opt_revmsg){
-                chat.addContent(data.Body.Sender, data.Body.TIMElemet[0])
+                chatLeft.addContent(data.Body.Sender, data.Body.TIMElemet[0])
             }
         };
         

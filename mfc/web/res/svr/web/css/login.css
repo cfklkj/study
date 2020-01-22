@@ -1,71 +1,51 @@
-body{
-    margin:0px;
-    padding:0px;
-    font-family:sans-serif;
-    background: url(/image/back.jpg);
-    background-size:cover;
-}
-.box{
+
+.in_main{
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%,-50%);
     /*实现块元素百分比下居中*/
-    width:450px;
-    padding:50px;
-    background: rgba(0,0,0,.8);
-    box-sizing:border-box;
-    box-shadow: 0px 15px 25px rgba(0,0,0,.5);
+    width:866px;
+    height:774px;
+    background:rgba(243,241,243,1);
+    opacity:1;
     border-radius:15px;
 }
-.box h2{
-    margin:0 0 30px;
-    padding:0;
-    color: #fff;
-    text-align:center;
+.in-left{width:84px; height: 100%; opacity:1;background-color: #250A35; border-radius:15px 0px 0px 15px;} 
+.in-right{margin-left:84px; margin-top: -774px; width:782px; height: 100%;} 
+
+#l_me img{
+    width: 48px;
+    height: 48px;
 }
-.box .inputbox{
-    position:relative;
+
+#l_me {
+    padding-top: 28px;
+    padding-left: 19px;
+} 
+#l_chat {
+    padding-top: 28px;
+    padding-left: 19px;
 }
-.box .inputbox input{
-    width: 100%;
-    padding:10px 0;
-    font-size:16px;
-    color:#fff;
-    letter-spacing: 1px;
-    margin-bottom: 30px;
-    border:none;
-    border-bottom: 1px solid #fff;
-    outline:none;
-    background: transparent;
+#l_chat img{
+    width: 48px;
+    height: 48px;
 }
-.box .inputbox label{
-    position:absolute;
-    top:0px;
-    left:0px;
-    padding:10px 0;
-    font-size: 16px;
-    color:#fff;
-    pointer-events:none;
-    transition:.5s;
+
+#l_black {
+    padding-top: 28px;
+    padding-left: 19px;
 }
-.box .inputbox input:focus ~ label,
-.box .inputbox input:valid ~ label
-{
-    top:-18px;
-    left:0;
-    color:#03a9f4;
-    font-size:14px;
+#l_black img{
+    width: 48px;
+    height: 48px;
+} 
+
+#l_set {
+    padding-top: 480px;
+    padding-left: 19px;
 }
-.box input[type="button"]
-{
-    background: transparent;
-    border:none;
-    outline:none;
-    font-size: 16px;
-    color:#fff;
-    background: #03a9f4;
-    padding:15px 20px;
-    cursor: pointer;
-    border-radius:10px; 
+#l_set img{
+    width: 48px;
+    height: 48px;
 }

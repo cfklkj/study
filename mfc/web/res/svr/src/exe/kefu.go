@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"./config"
 	tcpClient "./tcpCon"
 	"golang.org/x/net/websocket"
 )
@@ -21,5 +22,6 @@ func RunWebSocketSvr(thisWebSocketUrl string, callback AcceptWebSoketFunc) {
 }
 
 func main() {
-	RunWebSocketSvr("localhost:10023", tcpClient.AcceptFunc)
+	cfg := config.NewConfig().GetConfigInfo()
+	RunWebSocketSvr(cfg.WebSocket, tcpClient.AcceptFunc)
 }

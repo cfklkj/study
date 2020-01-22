@@ -19,6 +19,11 @@ var localSocket = lSocket.Method = {
        var data =  {"Act":imDefine.Act_write, "Sender": user, "Data":msgStr}  
        return JSON.stringify(data)
     }, 
+    getLoginInfo: function(userName, password) {  
+        body = 'username=' +userName+ "&password=" +password; 
+        var data =  {"Act":imDefine.Act_getLogin, "Data":body}   
+        wsLocal.send(JSON.stringify(data)); 
+    },
     send:function(msg){
          //发送文本 
          wsLocal.send(msg); 
@@ -59,11 +64,14 @@ var localSocket = lSocket.Method = {
                 chat.addMsg(data.Sender, data, true)
             } 
             if (data.Code == imDefine.Act_msgLen){
-                console.log("dddsss",data)
                 logLength = data.Data.Index 
                 actRecords.add(imDefine.act_selectContentLogLenth, logLength); 
-                chat.chat_logFirst = true;
-                chat.upLog(); 
+                chatRight.chat_logFirst = true;
+                chatRight.upLog(); 
+            }
+            if (data.Code == imDefine.Act_getLogin){
+                console.log("fff",data)
+                outDiv.resLogins(data.Data)
             }
         };
         

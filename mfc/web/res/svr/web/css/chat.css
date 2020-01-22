@@ -1,105 +1,25 @@
 
-.div-left{ float:left;width:29%;border:1px solid #F00} 
-.div-right{ float:right;width:69%;border:1px solid #000} 
-
-.talk_con{
-    width:920px;
-    height:700px;
-    border:1px solid #666;
-    margin:50px auto 0;
-    background:#f9f9f9;
+#chat_main{
+    width:782px;
+    height:774px;
+    background:rgba(243,241,243,1);
+    opacity:1;
+    border-radius:0px 15px 15px 0px;
 }
-.talk_show{
-    width:580px;
-    height:420px;
-    border:1px solid #666;
-    background:#fff;
-    margin:3px auto 0;
-    overflow:auto;
-}
-.talk_input{
-    width:580px;
-    margin:5px auto 0;
-}
-.whotalk{
-    width:80px;
-    height:30px;
-    float:left;
-    outline:none;
-}
-.talk_word{
-    width:100%;
-    height:96px;
-    padding:0px;
-    float:left; 
-    outline:none;
-    text-indent:10px;
-}        
-.talk_sub{
-    width:56px;
-    height:30px;
-    float: right;;
-    margin-right:10px;
-}
-.atalk{
-    margin:10px; 
-}
-.atalk span{
-    display:inline-block;
-    background:#0181cc;
-    border-radius:10px;
-    color:#fff;
-    padding:5px 10px;
-}
-.btalk{
-    margin:10px;
-    text-align:right;
-}
-.btalk span{
-    display:inline-block;
-    background:#ef8201;
-    border-radius:10px;
-    color:#fff;
-    padding:5px 10px;
-} 
-.atalk span img{
-    width: 86px;
-    height: 86px;
-}
-.btalk span img{
-    width: 86px;
-    height: 86px;
-}
-.messageContent {
-    border: 1px solid #453321;
-    width: 300px;
-    height: 560px;
-    display: block; 
-    border-radius: 3px;
-    background: #93775d; 
-    color: #fff;
-    font-size: 14px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-.messageContent p {
-    border-bottom: 1px dashed #d09c6b;
-    padding: 10px 0;
-    overflow-x: hidden;
-}
-.messageContent p img {
-    width: 35px;
-    height: 35px;
-    border: 1px solid #ff9b67;
-    border-radius: 5px;
-    margin-right: 10px;
-    float: left;
-}
-.messageContent p span {
-    float: left;
-    display: inline;
-    height: 35px;
-    line-height: 35px;
-    font-size: 14px;
-    color: #fff3e7;
-}
+.chat_l{ 
+    width:218px;
+    height:774px;
+    background:rgba(194,189,197,1);
+    opacity:0.39;    
+}  
+.chat_r{  
+    margin-left: 218px;
+    margin-top: -774px;
+    width:564px;
+    height:774px;
+    background:rgba(194,189,197,1);
+    opacity:0.39; 
+    border-radius:0px 15px 15px 0px;
+}  
+ 
+ 

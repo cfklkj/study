@@ -40,14 +40,4 @@ var imgDlg = layoutImgDlg.Method = {
         }   
         return new Blob( [ab] , {type : 'image/png'});  
     } 
-}
-// var imgDlgHtmls = '<div>\
-//     <label class="control-label" style="float: left;">图片地址:</label>\
-//     <input type="file" id="file-button" style="display: none;" name="qiniuPic" accept="image/*" >\
-//     <div class="file_scan" style="width: 100px;float: left; margin-top: 20px;" id="fileUpdate-button">\
-//         添加浏览\
-//     </div>\
-//     <div style="clear: left;">\
-//         <img style="width: 270px;height: 135px;border-radius: 5px" id="img" src="" alt="">\
-//     </div>\
-// </div>'
+} 

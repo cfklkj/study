@@ -43,6 +43,7 @@ const (
 	Msg_del      = 2003
 	Msg_getLenth = 2004
 	Msg_fileUp   = 2005
+	Msg_login    = 2006
 )
 
 //返回信息通用结构体
