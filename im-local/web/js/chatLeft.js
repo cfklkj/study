@@ -59,7 +59,8 @@ var chatLeft = layoutChatLeft.Method = {
         }else if (msg.type == imDefine.chat_file){
             datas = "文件"
         }else{ 
-            datas = msg.content.substring(0, 16)
+            datas = util.unzip(msg.content)
+            datas = datas.substring(0, 16)
         }
         localSocket.send(localSocket.mkSetMsg(user, msg))
         if (memHash.find(user)){ 
