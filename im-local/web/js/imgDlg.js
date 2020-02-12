@@ -4,7 +4,10 @@ var imgDlg = layoutImgDlg.Method = {
     fileName:"",
     openDlg:function(id){   
         ele = util.getEleById(id) 
-        ele.value = ""   //重复图片问题
+        if(ele.value != "")    //重复图片问题
+        {
+            ele.value = ""
+        }
         ele.click();
     },
     changes:function(file){

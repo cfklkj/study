@@ -2,7 +2,7 @@ var flyUtil =  flyUtil || {};
 
 var util = flyUtil.commonMethod  = {
     zip:function(str){
-        var bStr = pako.gzip(str,{to:'string'})
+        var bStr = pako.gzip(encodeURIComponent(str),{to:'string'})
         return btoa(bStr)
     },
     unzip:function(b64Data){ 
@@ -15,7 +15,7 @@ var util = flyUtil.commonMethod  = {
         var data    = pako.inflate(binData);
         // Convert gunzipped byteArray back to ascii string:
         strData   = String.fromCharCode.apply(null, new Uint16Array(data));
-        return strData; 
+        return decodeURIComponent(strData); 
     },
     getIp:function(){
         var reg = /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/;

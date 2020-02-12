@@ -3,9 +3,11 @@ package httpCon
 import (
 	"fmt"
 	"io"
+	"log"
 	"math/rand"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"../define"
 )
@@ -50,6 +52,11 @@ func (c *Http) upload(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func (c *Http) listenFile() {
-	http.Handle(define.FILE_PATH, http.FileServer(http.Dir(define.FILE_SVR_PATH)))
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("FileServer:", dir)
+	http.Handle(define.FILE_PATH, http.FileServer(http.Dir(dir)))
 	http.HandleFunc("/upload", c.upload) //设置访问的路由
 }
