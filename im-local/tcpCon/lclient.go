@@ -36,7 +36,6 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 		}
 		var info define.MsgInfo
 		json.Unmarshal(client.allBytes, &info)
-		fmt.Println("func", info)
 		switch info.Act {
 		case define.Msg_login:
 			var data define.LoginMsg
@@ -69,14 +68,13 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 		case define.Msg_del:
 		case define.Msg_getLenth:
 			info.Index = countLine(username, info.ConversationId)
-			fmt.Println("have--", info.ConversationId, info.Index)
 		case define.Msg_fileUp:
 		default:
 		}
 		client.NoticeClient(info.Act, info)
 	}
 	c.login.DelCon(username)
-	fmt.Println("over", username)
+	fmt.Println("client-out", username)
 }
 
 func readLine(user, to string, index int) string {

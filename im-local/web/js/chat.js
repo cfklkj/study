@@ -15,8 +15,7 @@ var chat = layoutChat.Method = {
         chatLeft.show(); 
         chatRight.show(); 
     }, 
-    showImg:function(evt){
-        console.debug(evt) 
+    showImg:function(evt){ 
         div = util.addEle("div")
         util.addClass(div,'jump')
 

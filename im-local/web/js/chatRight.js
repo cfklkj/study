@@ -144,7 +144,7 @@ var chatRightHtml='<div class="chat_r">\
 <i></i>\
 <div  id="chat_r_m"></div>\
 <div  id="chat_r_b">\
-<input type="file" id="file-button" style="display: none;" >\
+<input type="file" id="file-button" style="display: none;" value="">\
 <span index="1" id="fileUpdate-button"><img  alt="" src="/image/file.png"/></span>\
 <span index="2" id="audio-button"><img onclick="chatRight.talk()" alt="" src="/image/talk.png"/></span>\
 <textarea  id="talkwords" value=""></textarea>\

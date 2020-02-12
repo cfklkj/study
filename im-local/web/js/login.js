@@ -69,8 +69,7 @@ var inDiv = MgrDiv.Method = {
             default: 
                 chatLeft.addContent(msg.ConversationId, msg.Data)   
                 if (!chatLeft.isSelectContent(msg.ConversationId))
-                {
-                    console.debug("addcontent - choice")
+                { 
                     return
                 } 
                 chatRight.addMsg(msg.ConversationId, msg.Data)   

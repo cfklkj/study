@@ -3,19 +3,19 @@ var imgDlg = layoutImgDlg.Method = {
     fileType:"",
     fileName:"",
     openDlg:function(id){   
-        ele = util.getEleById(id)
+        ele = util.getEleById(id) 
+        ele.value = ""   //重复图片问题
         ele.click();
     },
     changes:function(file){
         if (!file.files || !file.files[0]) { 
             return;
-        } 
-        console.debug(file.files[0])
+        }  
         var reader = new FileReader(); 
         reader.onload = function (evt) {  
             imgDlg.fileType = file.files[0].type
             imgDlg.fileName = file.files[0].name
-            imgDlg.sumitImageFile(evt.target.result, this.fileType) 
+            imgDlg.sumitImageFile(evt.target.result, this.fileType)  
         } 
         reader.readAsDataURL(file.files[0]); 
     },

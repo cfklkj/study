@@ -5,8 +5,7 @@ var util = flyUtil.commonMethod  = {
         var bStr = pako.gzip(str,{to:'string'})
         return btoa(bStr)
     },
-    unzip:function(b64Data){
-        console.log(data); 
+    unzip:function(b64Data){ 
         var strData   = atob(b64Data);
         // Convert binary string to character-number array
         var charData  = strData.split('').map(function(x){return x.charCodeAt(0);});
