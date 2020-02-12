@@ -145,6 +145,5 @@ func (c *Http) sendBack(w http.ResponseWriter, code int, data interface{}) {
 	rst.CodeMsg = c.getCodeStr(code)
 	rst.Data = data
 	dataStr, _ := json.Marshal(rst)
-	fmt.Println("sendBack", string(dataStr))
 	io.WriteString(w, string(dataStr))
 }

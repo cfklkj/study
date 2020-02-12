@@ -1,7 +1,6 @@
 package httpCon
 
 import (
-	"fmt"
 	"io"
 	"math/rand"
 	"net/http"
@@ -26,7 +25,6 @@ func (c *Http) randName(lenth int, tail string) string {
 }
 
 func (c *Http) upload(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("upload")
 	if r.Method == "GET" {
 		c.sendBack(w, define.Err_MethodGet, "")
 		return

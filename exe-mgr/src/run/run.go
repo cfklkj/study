@@ -17,7 +17,6 @@ type Record func(name string, reader io.ReadCloser)
 
 //执行命令--
 func RunCmd(ctx context.Context, name, path string, callLog Record, callAdd RunAdd, callDel RunDel) {
-	fmt.Println("start", name, path)
 	dir := filepath.Dir(path)
 	cmd := exec.CommandContext(ctx, "cmd", "/c", path)
 	cmdStdoutPipe, _ := cmd.StdoutPipe()
@@ -36,6 +35,7 @@ func RunCmd(ctx context.Context, name, path string, callLog Record, callAdd RunA
 		fmt.Println(err)
 	}
 	callDel(name, cmd.Process.Pid)
+	fmt.Println("server-over", name)
 }
 
 /*参考
@@ -62,7 +62,6 @@ func (c *DoRunInfo) syncLog(name string, reader io.ReadCloser) {
 			}
 		}
 	}
-	fmt.Println("ddd", name)
 }
 
 /*

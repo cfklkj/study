@@ -1,8 +1,6 @@
 package data_json
 
 import (
-	"fmt"
-
 	conf "../module/util/config"
 )
 
@@ -25,7 +23,6 @@ func (c *JsonData) Init() {
 }
 func (c *JsonData) UpData(data []RunInfo) {
 	c.cf.SetConfigInfo(c.key, &data)
-	fmt.Println(data)
 }
 
 //获取配置信息

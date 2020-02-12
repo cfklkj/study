@@ -1,7 +1,5 @@
 package data_json
 
-import "fmt"
-
 type RunInfo struct {
 	Name, Path string
 }
@@ -31,11 +29,10 @@ func (c *RunInfos) AddRunInfo(name, path string) bool {
 	}
 	c.datas = append(c.datas, info)
 	c.jsonData.UpData(c.datas)
-	fmt.Println(c.datas)
 	return true
 }
 func (c *RunInfos) AltRunInfo(oldName, name, path string) bool {
-	if c.GetRunInfo(name) != nil {
+	if c.GetRunInfo(name) == nil {
 		return false
 	}
 	var info RunInfo

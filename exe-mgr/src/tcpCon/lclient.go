@@ -59,7 +59,6 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 		}
 		var info define.MsgInfo
 		json.Unmarshal(client.allBytes, &info)
-		fmt.Println("func", username, info)
 		switch info.Act {
 		case define.Msg_Login:
 			username = info.ConversationId
@@ -72,7 +71,6 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 		case define.Msg_del:
 		case define.Msg_getLenth:
 			info.Index = countLine(username, info.ConversationId)
-			fmt.Println("have--", info.ConversationId, info.Index)
 		case define.Msg_run:
 			data, _ := json.Marshal(info.Data)
 			var runInfo define.Run
@@ -107,6 +105,7 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 				}
 			case define.Act_alt:
 				runInfo.Data = c.dataJson.AltRunInfo(runInfo.OldName, runInfo.Name, runInfo.Path)
+				fmt.Println(runInfo.OldName, runInfo.Name, runInfo.Path, runInfo.Data)
 			case define.Act_del:
 				c.dataJson.StopSingle(runInfo.Name, c.run.Stop)
 				runInfo.Data = c.dataJson.DelRunInfo(runInfo.Name)
@@ -143,7 +142,7 @@ func (c *WebTcp) AcceptFunc(conn *websocket.Conn) {
 	}
 	c.clients[id] = nil
 	c.buildId.pushId(id)
-	fmt.Println("over", username)
+	fmt.Println("web-client-out", username)
 }
 
 func readLine(user, to string, index int) string {
