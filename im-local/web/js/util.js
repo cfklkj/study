@@ -27,6 +27,9 @@ var util = flyUtil.commonMethod  = {
             return ip[0]
         }
     },
+    getUrl:function(){  
+        return window.location.host 
+    },
     addEle:function(tag){
         return document.createElement(tag) //li a
     },

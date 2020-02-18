@@ -18,7 +18,7 @@ var outDiv = LoginDiv.Method = {
         if (username == "") {
             username = "custer"
         } 
-        localSocket.connect("ws://" + util.getIp()+ ":10023/v1/tzj", username, password) 
+        localSocket.connect("ws://" + util.getUrl()+ "/wss", username, password) 
     },
     resLogins:function(msg){   
          data = JSON.parse(msg)

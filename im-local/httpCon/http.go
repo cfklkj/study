@@ -39,7 +39,10 @@ func (c *Http) Listen() {
 	// 网址与处理逻辑对应起来
 	//绑定socket方法
 	fmt.Println("启动http服务:", c.conf.HttpIpPort)
-	http.ListenAndServe(c.conf.HttpIpPort, nil) //设置监听的端口
+	err := http.ListenAndServe(c.conf.HttpIpPort, nil) //设置监听的端口
+	if err != nil {
+		fmt.Println("err-http", err)
+	}
 }
 
 func (c *Http) Prox(w http.ResponseWriter, req *http.Request) {

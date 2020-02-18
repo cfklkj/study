@@ -5,7 +5,7 @@ document.write('<script  type="text/javascript" src="js/lib/pako.min.js"></scrip
 document.write('<script  type="text/javascript" src="js/login.js"></script>')  
 document.write('<script  type="text/javascript" src="js/logOut.js"></script>')  
 document.write('<script  type="text/javascript" src="js/webHttp.js"></script>')  
-document.write('<script  type="text/javascript" src="js/websocket_local.js"></script>') 
+document.write('<script  type="text/javascript" src="js/webSocket_local.js"></script>') 
 document.write('<script  type="text/javascript" src="js/define.js"></script>')  
 document.write('<script  type="text/javascript" src="js/chat.js"></script>')  
 document.write('<script  type="text/javascript" src="js/chatLeft_search.js"></script>')  

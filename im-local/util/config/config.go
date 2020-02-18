@@ -1,11 +1,5 @@
 package Config
 
-/*
-配置信息
-加载配置LoadConfig
-获取配置结构体 GetConfigInfo
-
-*/
 import (
 	"encoding/json"
 	"fmt"
@@ -43,7 +37,7 @@ func (c *Config) GetConfigInfo(node string, res interface{}) bool {
 	//解析信息到对象
 	data, err := json.Marshal(c.Info)
 	if err != nil {
-		fmt.Println("GetConfigInfo", "err", err)
+		fmt.Println("err", "GetConfigInfo", err)
 		return false
 	}
 	err = json.Unmarshal(data, res)
@@ -72,7 +66,7 @@ func (c *Config) createConfigFile() error {
 func (c *Config) setValue(jsonFile string, key string, value interface{}) bool {
 	byteValue, err := ioutil.ReadFile(jsonFile)
 	if err != nil {
-		fmt.Println("setValue", "err", err)
+		fmt.Println("err", "setValue", err)
 		return false
 	}
 	//读取原结构
@@ -114,13 +108,13 @@ func (c *Config) getValue(jsonFile string, key string) interface{} {
 	return nil
 }
 
-//-----test
-func main() {
-	// ret := NewConfig()
-	// var tmp define.SvrConfig
-	// t := ret.GetConfigInfo("svr_discover1", &tmp)
-	// if !t {
-	// 	ret.SetConfigInfo("svr_discover1", tmp)
-	// }
-	// fmt.Println(t, tmp)
-}
+// //-----test
+// func main() {
+// 	ret := NewConfig()
+// 	var tmp define.SvrConfig
+// 	t := ret.GetConfigInfo("svr_discover1", &tmp)
+// 	if !t {
+// 		ret.SetConfigInfo("svr_discover1", tmp)
+// 	}
+// 	fmt.Println(t, tmp)
+// }

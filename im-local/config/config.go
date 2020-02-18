@@ -22,8 +22,7 @@ type Config struct {
 
 func makeInfo() ConfigInfo {
 	var info ConfigInfo
-	info.WebSocket = ":10023"
-	info.HttpIpPort = ":10024"
+	info.HttpIpPort = ":20024"
 	info.UpUrl = "/upload"
 	info.DownUrl = "/download"
 	info.DefaultHtml = "index.html"
