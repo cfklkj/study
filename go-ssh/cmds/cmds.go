@@ -7,14 +7,23 @@ type Check func(string)
 type Cmds struct {
 	status map[string]interface{}
 	check  map[string]Check
-	Run    func(name, shell string)
+	result map[string]interface{}
+	Run    func(name, shell string) bool
 }
 
 func NewCmds() *Cmds {
 	ret := new(Cmds)
 	ret.status = make(map[string]interface{})
 	ret.check = make(map[string]Check)
+	ret.result = make(map[string]interface{})
 	return ret
+}
+
+func (c *Cmds) setResult(name string, value interface{}) {
+	c.result[name] = value
+}
+func (c *Cmds) getResult(name string) interface{} {
+	return c.result[name]
 }
 
 func (c *Cmds) BindCheck(name string, callBack Check) {

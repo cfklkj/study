@@ -33,6 +33,12 @@ const (
 	str_sdkBuildTools      = "sdkBuildTools"
 	str_gradleCheck        = "gradleCheck"
 	str_gradleBuild        = "gradleBuild"
+	str_fail2banCheck      = "fail2banCheck"
+	str_fail2ban           = "fail2ban"
+	str_fail2banRestart    = "fail2banRestart"
+	str_lsofPort           = "lsofPort"
+	str_lsofPid            = "lsofPid"
+	str_kill               = "kill"
 )
 
 const (

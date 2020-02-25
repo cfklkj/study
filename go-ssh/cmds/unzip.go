@@ -16,18 +16,20 @@ func (c *Cmds) cmd_installUnzip() {
 	c.Run(str_unzip, "apt install unzip -y")
 }
 
-func (c *Cmds) cmd_unzipFile(filePath string) {
+func (c *Cmds) cmd_unzipFile(filePath string) bool {
 	c.BindCheck(str_unzipFile, c.chckUnzipFile)
 	dir, _ := filepath.Split(filePath)
 	str := "unzip -o " + filePath + " -d " + dir
 	c.Run(str_unzipFile, str)
+	return c.getResult(str_unzipFile).(bool)
 }
-func (c *Cmds) cmd_untarFile(filePath string) {
+func (c *Cmds) cmd_untarFile(filePath string) bool {
 	c.BindCheck(str_unzipFile, c.chckUnzipFile)
 	dir, _ := filepath.Split(filePath)
 	str := "cd " + dir +
 		"\ntar zxvf " + filePath
 	c.Run(str_unzipFile, str)
+	return c.getResult(str_unzipFile).(bool)
 }
 
 //unzip
@@ -49,12 +51,9 @@ func (c *Cmds) chckUnzipInstall(msg string) {
 func (c *Cmds) chckUnzipFile(msg string) {
 	if strings.Contains(msg, str_err) {
 		fmt.Println("解压失败", msg)
+		c.setResult(str_unzipFile, false)
 		return
 	}
+	c.setResult(str_unzipFile, true)
 	fmt.Println("解压成功")
-	// if strings.Contains(msg, "extracting:") || strings.Contains(msg, "inflating:") {
-	// 	fmt.Println("解压成功")
-	// } else {
-	// 	fmt.Println("解压失败", msg)
-	// }
 }

@@ -16,17 +16,19 @@ func (c *Cmds) cmd_installUfw() {
 	c.Run(str_ufw, "apt install ufw -y")
 }
 
-func (c *Cmds) Cmd_ufwAllow(port int) {
+func (c *Cmds) Cmd_ufwAllow(port int) bool {
 	c.BindCheck(str_ufwAllow, c.checkAllow)
 	c.Run(str_ufwAllow, "ufw allow "+strconv.Itoa(port))
+	return c.getResult(str_ufwAllow).(bool)
 }
 func (c *Cmds) cmd_ufwEnable() {
 	c.BindCheck(str_ufwEnable, c.checkEnable)
 	c.Run(str_ufwEnable, "echo y|ufw enable")
 }
-func (c *Cmds) Cmd_ufwDelAllow(port int) {
+func (c *Cmds) Cmd_ufwDelAllow(port int) bool {
 	c.BindCheck(str_ufwDelAllow, c.checkDeleteAllow)
 	c.Run(str_ufwDelAllow, "ufw delete allow "+strconv.Itoa(port))
+	return c.getResult(str_ufwDelAllow).(bool)
 }
 
 //-------------------check
@@ -57,15 +59,19 @@ func (c *Cmds) checkEnable(msg string) {
 
 func (c *Cmds) checkAllow(msg string) {
 	if strings.Contains(msg, "Rule added") {
+		c.setResult(str_ufwAllow, false)
 		fmt.Println("ufw", "Rule added")
 	} else {
+		c.setResult(str_ufwAllow, false)
 		fmt.Println("ufw", msg)
 	}
 }
 func (c *Cmds) checkDeleteAllow(msg string) {
 	if strings.Contains(msg, "Rule deleted") {
+		c.setResult(str_ufwDelAllow, true)
 		fmt.Println("ufw", "Rule deleted")
 	} else {
+		c.setResult(str_ufwDelAllow, false)
 		fmt.Println("ufw", msg)
 	}
 }

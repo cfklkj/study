@@ -15,14 +15,16 @@ func (c *Cmds) cmd_installNginx() {
 	c.Run(str_nginx, "apt install nginx -y")
 }
 
-func (c *Cmds) Cmd_nginxReStart() {
+func (c *Cmds) Cmd_nginxReStart() bool {
 	c.BindCheck(str_nginxReStart, c.checkNginxConf)
 	c.Run(str_nginxReStart, "nginx -t")
+	return c.getResult(str_nginxReStart).(bool)
 }
 
-func (c *Cmds) Cmd_relaodNginx() {
+func (c *Cmds) Cmd_relaodNginx() bool {
 	c.BindCheck(str_nginxReload, c.checkNginxReload)
 	c.Run(str_nginxReload, "nginx -s reload")
+	return c.getResult(str_nginxReload).(bool)
 }
 
 //----------------------
@@ -47,14 +49,18 @@ func (c *Cmds) checkNginxInstall(msg string) {
 func (c *Cmds) checkNginxConf(msg string) {
 	if strings.Contains(msg, str_err) {
 		fmt.Println("配置文件错误")
+		c.setResult(str_nginxReStart, false)
 		return
 	}
-	c.Cmd_relaodNginx()
+	rst := c.Cmd_relaodNginx()
+	c.setResult(str_nginxReStart, rst)
 }
 func (c *Cmds) checkNginxReload(msg string) {
 	if msg != "" {
 		fmt.Println("失败", msg)
+		c.setResult(str_nginxReload, false)
 		return
 	}
+	c.setResult(str_nginxReload, true)
 	fmt.Println("已重启nginx")
 }

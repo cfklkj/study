@@ -16,10 +16,11 @@ func (c *Cmds) cmd_installCertbot() {
 	c.Run(str_certbot, "apt install certbot python-certbot-nginx -y")
 }
 
-func (c *Cmds) Cmd_makeCert(domain string) {
+func (c *Cmds) Cmd_makeCert(domain string) bool {
 	c.BindCheck(str_certNew, c.checkNewCert)
 	str := "certbot --nginx certonly -d " + domain
 	c.Run(str_certNew, str)
+	return c.getResult(str_certNew).(bool)
 }
 
 func (c *Cmds) cmd_RenewCert() {
@@ -48,10 +49,11 @@ func (c *Cmds) checkCertbotInstall(msg string) {
 	}
 }
 func (c *Cmds) checkNewCert(msg string) {
-	if strings.Contains(msg, str_err) {
+	if !strings.Contains(msg, "Error creating") {
 		c.cmd_RenewCert()
+		c.setResult(str_certNew, true)
 	} else {
-		c.cmd_lsCert()
+		c.setResult(str_certNew, false)
 	}
 }
 func (c *Cmds) checkRenewCert(msg string) {

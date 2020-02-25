@@ -6,10 +6,6 @@ import (
 	"strings"
 )
 
-func (c *Cmds) Cmd_environmemt(evtStr string) { // PATH=$PATH:xx
-	sh := "export " + evtStr
-	c.Run(str_environment, sh)
-}
 func (c *Cmds) Cmd_checkJDK() {
 	c.BindCheck(str_jdkCheck, c.checkJDK)
 	sh := "javac -version"
@@ -62,7 +58,7 @@ func (c *Cmds) Cmd_checkGradle(path string) {
 		"\ngradle -v"
 	c.Run(str_gradleCheck, sh)
 }
-func (c *Cmds) Cmd_gradleBuild(pathGradle, pathAndroid, pathPro string) {
+func (c *Cmds) Cmd_gradleBuild(pathGradle, pathAndroid, pathPro string) bool {
 	c.BindCheck(str_gradleBuild, c.checkBuild)
 	sh := "export GRADLE_HOME=" + pathGradle +
 		"\nexport ANDROID_HOME=" + pathAndroid +
@@ -71,14 +67,17 @@ func (c *Cmds) Cmd_gradleBuild(pathGradle, pathAndroid, pathPro string) {
 		"\ngradle assembleRelease"
 	fmt.Println("正在编译。。。")
 	c.Run(str_gradleBuild, sh)
+	return c.getResult(str_gradleBuild).(bool)
 }
 
 //--------check
 func (c *Cmds) checkBuild(msg string) {
 	if strings.Contains(msg, "BUILD SUCCESSFUL") {
 		fmt.Println("gradle", "BUILD SUCCESSFUL")
+		c.setResult(str_gradleBuild, true)
 	} else {
 		fmt.Println("gradle", "BUILD 失败")
+		c.setResult(str_gradleBuild, false)
 	}
 }
 
