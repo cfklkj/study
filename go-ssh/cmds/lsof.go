@@ -7,7 +7,7 @@ import (
 
 func (c *Cmds) Cmd_lsofPort(port int) string {
 	c.BindCheck(str_lsofPort, c.checkRunPort)
-	sh := "lsof -i:" + strconv.Itoa(port) + " | grep \"root\""
+	sh := "lsof -R -i:" + strconv.Itoa(port) + " | grep \" 1 \""
 	c.Run(str_lsofPort, sh)
 	return c.getResult(str_lsofPort).(string)
 }
