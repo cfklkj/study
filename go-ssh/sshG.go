@@ -38,10 +38,15 @@ func main() {
 	// ngx.Cmd_checkFail2ban()
 	// rst =  ngx.Cmd_restartFail2ban()
 	//--kill port's pid
-	rst = ngx.Cmd_killRunPortPID(80)
+	//rst = ngx.Cmd_killRunPortPID(80)
 	//---scp
 	//rst = sh.SCPupFile("sshG.go", "/tmp/")
 	//rst = sh.SCPDownFile("/tmp/sshG.go", "d:/")
+	//---file mod
+	//ngx.Cmd_showMode("/tmp")
+	//rst = ngx.Cmd_chown("im", "/tmp/java_url3.7z")
+	rst = ngx.Cmd_chmodR("755", "/tmp/java_url3.7z")
+	//	rst = ngx.Cmd_chown("root:root", "/tmp/java_url3.7z")
 	fmt.Println("rst", rst)
 	sh.Clear()
 }

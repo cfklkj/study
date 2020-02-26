@@ -39,6 +39,9 @@ const (
 	str_lsofPort           = "lsofPort"
 	str_lsofPid            = "lsofPid"
 	str_kill               = "kill"
+	str_lsMod              = "lsMod"
+	str_chmod              = "chmod"
+	str_chown              = "chown"
 )
 
 const (
