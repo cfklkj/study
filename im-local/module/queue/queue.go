@@ -62,9 +62,4 @@ func (this *LinkListNode) PrevData() interface{} {
 		return prev.data
 	}
 	return nil
-	// for prev != nil {
-	// 	log.Println("node", prev.data)
-
-	// 	prev = prev.next
-	// }
 }

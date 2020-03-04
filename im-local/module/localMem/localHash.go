@@ -1,42 +1,131 @@
 package localMem
 
-//--https://blog.csdn.net/yzf279533105/article/details/94010954
+import (
+	"sync"
+)
 
-//----------------------------hash--------------------
-type HashInfo struct { //map[interface{}]interface{}
-	data map[interface{}]interface{}
-}
-
-func (c *HashInfo) Hwnd() map[interface{}]interface{} {
-	return c.data
-}
-
-func (c *HashInfo) Set(file, value interface{}) {
-	c.data[file] = value
-}
-func (c *HashInfo) Del(file interface{}) {
-	delete(c.data, file)
-}
-func (c *HashInfo) Find(file interface{}) bool {
-	_, ok := c.data[file]
-	return ok
-}
-func (c *HashInfo) Get(file interface{}) interface{} {
-	return c.data[file]
-}
-func (c *HashInfo) GetValues(file interface{}) interface{} {
-	return c.data
-}
-func (c *HashInfo) Keys() []interface{} {
-	var keys []interface{}
-	for name, _ := range c.data {
-		keys = append(keys, name)
-	}
-	return keys
+type LocalHash struct {
+	hash          map[interface{}]*HashInfo
+	lockHash      sync.Mutex
+	PrintHashKeys func(key interface{})
 }
 
-func NewHashInfo() *HashInfo {
-	ret := new(HashInfo)
-	ret.data = make(map[interface{}]interface{})
+func NewLocalHash() *LocalHash {
+	ret := new(LocalHash)
+	ret.hash = make(map[interface{}]*HashInfo)
 	return ret
+}
+
+func (c *LocalHash) lockH() {
+	c.lockHash.Lock()
+}
+func (c *LocalHash) unlockH() {
+	c.lockHash.Unlock()
+}
+
+//查找key
+func (c *LocalHash) Hfind(section string) bool {
+	c.lockH()
+	defer c.unlockH()
+	return c.hash[section] != nil
+}
+
+//获取field
+func (c *LocalHash) Hfield(section interface{}) (res HashInfo) {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return res
+	}
+	res = *c.hash[section]
+	return res
+}
+
+//查找field
+func (c *LocalHash) HfindKey(section, key interface{}) bool {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return false
+	}
+	return c.hash[section].Find(key)
+}
+
+func (c *LocalHash) HKeys(section interface{}) []interface{} {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return nil
+	}
+	return c.hash[section].Keys()
+}
+
+func (c *LocalHash) HprintKeys(section interface{}) {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] != nil {
+		c.hash[section].PrintKeys()
+	}
+}
+func (c *LocalHash) HOneKey(section interface{}) interface{} {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return nil
+	}
+	return c.hash[section].RandOneKey()
+}
+
+//获取值
+func (c *LocalHash) Hget(section, key interface{}) interface{} {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return nil
+	}
+	return c.hash[section].Get(key)
+}
+
+//写入值
+func (c *LocalHash) HmkSection(section interface{}) {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		c.hash[section] = NewHashInfo()
+		if c.PrintHashKeys != nil {
+			c.hash[section].PrintKey = c.PrintHashKeys
+		}
+	}
+}
+
+//写入值
+func (c *LocalHash) Hset(section, key, value interface{}) {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		c.hash[section] = NewHashInfo()
+	}
+	c.hash[section].Set(key, value)
+}
+
+//删除field
+func (c *LocalHash) Hdel(section, key interface{}) bool {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return false
+	}
+	c.hash[section].Del(key)
+	return true
+}
+
+//删除section
+func (c *LocalHash) Hdrop(section interface{}) bool {
+	c.lockH()
+	defer c.unlockH()
+	if c.hash[section] == nil {
+		return false
+	}
+	delete(c.hash, section)
+	return true
 }
