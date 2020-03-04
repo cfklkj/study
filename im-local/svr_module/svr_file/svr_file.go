@@ -35,6 +35,7 @@ func (c SvrFile) Listen() int {
 	}
 	os.Mkdir(dir, os.ModePerm)
 	os.Mkdir(c.FileServerDir+c.PatternLog, os.ModePerm)
+	os.Mkdir(c.FileServerDir+c.PatternFileServer, os.ModePerm)
 	fmt.Println("FileServer:", dir)
 	http.Handle(c.PatternFileServer, http.FileServer(http.Dir(dir)))
 	http.HandleFunc(c.PatternUpfile, c.upload)                     //设置访问的路由

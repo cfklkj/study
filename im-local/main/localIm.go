@@ -30,10 +30,14 @@ func main() {
 	svrtcp.Listen()
 	svrweb.Listen()
 	svrfile.Listen()
+
 	host := "127.0.0.1:801"
 	if len(os.Args) > 1 {
 		host = os.Args[1]
 	}
-	fmt.Println("eg:\n [ip:port]\nstart:" + host)
+	if len(os.Args) > 2 {
+		svrfile.FileServerDir = os.Args[2]
+	}
+	fmt.Println("eg:\n [ip:port] [fileSvrPath]\nstart:" + host)
 	http.ListenAndServe(host, nil)
 }
