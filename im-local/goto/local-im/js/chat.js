@@ -19,7 +19,7 @@ var chat = layoutChat.Method = {
         div = util.addEle("div")
         util.addClass(div,'jump')
 
-        span = '<span index="1"><img onclick="chat.hideImg()" src="/image/exit.png"></img></span>' 
+        span = '<span index="1"><img onclick="chat.hideImg()" ></img></span>' 
         div.innerHTML = span
 
         span = '<span index="2"><a href="' + evt.src + '" download="' + evt.name + '"><img src="' + evt.src + '"></img></a></span>' 
@@ -34,7 +34,7 @@ var chat = layoutChat.Method = {
     },
     addVideo:function(){ //视频
         embed = util.addEle("embed")
-        embed.src="./download/sys/tips.mp3"
+        embed.src=  "http://" +  util.getUrl() + "/download/sys/tips.mp3"
         embed.hidden=true 
         embed.autos
         eleBody = util.getEleById("bodys");  
@@ -43,7 +43,7 @@ var chat = layoutChat.Method = {
     },
     addAudio:function(){    //音频    --苹果 自带浏览器不能自动播放
         audio = util.addEle("audio")
-        audio.src="./download/sys/tips.mp3" 
+        audio.src= "http://" + util.getUrl() + "/download/sys/tips.mp3" 
         eleBody = util.getEleById("bodys"); 
         eleBody.appendChild(audio)
         this.audio_div = audio  

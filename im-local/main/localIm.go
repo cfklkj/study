@@ -33,9 +33,12 @@ func main() {
 		host = os.Args[1]
 	}
 	if len(os.Args) > 2 {
-		svrfile.FileServerDir = os.Args[2]
+		svrweb.FileServerDir = os.Args[2]
 	}
-	fmt.Println("eg:\n [ip:port] [fileSvrPath]\nstart:" + host)
+	if len(os.Args) > 3 {
+		svrfile.FileServerDir = os.Args[3]
+	}
+	fmt.Println("eg:\n [ip:port] [webLocalPath] [fileLocalPath]\nstart:" + host)
 
 	svrtcp.Listen()
 	svrweb.Listen()

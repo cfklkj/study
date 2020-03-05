@@ -1,7 +1,7 @@
 
 var chatLeftHtml='<div class="chat_l">\
 <div  id="chat_l_t" ><div class="chat_l_t_search">\
-<span><img  alt="" src="/image/search2.png"/></span>\
+<span><img  alt=""/></span>\
 <input type="text" value="" name="" required="" maxlength="11" placeholder="search" onchange="chatLeft.search(this)">\
 </div>\
 </div>\
@@ -42,10 +42,8 @@ var chatLeft = layoutChatLeft.Method = {
         times = util.timeHms() 
         p = util.addEle("p")
         p.setAttribute("onclick", "chatLeft.selectContent(this)")
-        p.setAttribute("name", user)
-        img = "/image/chatCuster.png"
-        str = '<img alt="" src=' + img + 
-            '></img><span index="1">' + user.substring(0, 11) +'</span><span index="2">' + times  +
+        p.setAttribute("name", user) 
+        str = '<img alt="" ></img><span index="1">' + user.substring(0, 11) +'</span><span index="2">' + times  +
             '</span><span index="3">' + datas +'</span>';            
         p.innerHTML = str
         content = document.getElementById(this.div_bottom);

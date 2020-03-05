@@ -48,6 +48,8 @@
     margin-left: 25px;
     width: 26px;
     height: 26px;
+    background-image: url(../image/file.png);
+    background-size: 26px 26px;
 }
 #chat_r_b span[index="2"] img{
     margin-top: 12px;
@@ -148,6 +150,8 @@ span img[index="chatImg2"] {
     width: 25px;
     height: 25px; 
     float: left;
+    background-image: url(../image/chatCuster.png);
+    background-size: 25px 25px;
 }
 
 span img[index="chatImg1"] {
@@ -158,4 +162,6 @@ span img[index="chatImg1"]{
     height: 25px;
     top:0; 
     float: right;
+    background-image: url(../image/chatMaster.png);
+    background-size: 25px 25px;
 }

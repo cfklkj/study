@@ -73,7 +73,7 @@ var chatRight = layoutChatRight.Method = {
     },
     addMsg:function(sender, jsData, isLog){ 
         //data.Sender, data.Type, data.Data 
-        console.debug("addMsgddd",sender, localSocket.loginUser)
+        console.debug("addMsgddd",jsData)
         body = jsData
         htmls = ""
         switch(body.type){
@@ -102,7 +102,7 @@ var chatRight = layoutChatRight.Method = {
             // div.appendChild(span)  
             //header img
             span = util.addEle("span") 
-            span.innerHTML = htmls + '<img index="chatImg1" src="/image/chatMaster.png"></img>'
+            span.innerHTML = htmls + '<img index="chatImg1" ></img>'
             span.appendChild(divTriangle) 
             div.appendChild(span)
         }else{
@@ -110,7 +110,7 @@ var chatRight = layoutChatRight.Method = {
             util.addClass(divTriangle, "triangle_left") 
             //header img
             span = util.addEle("span") 
-            span.innerHTML = '<img index="chatImg2" src="/image/chatCuster.png"></img>'
+            span.innerHTML = '<img index="chatImg2" ></img>'
             span.appendChild(divTriangle) 
             span.innerHTML += htmls
             div.appendChild(span)
@@ -144,7 +144,7 @@ var chatRightHtml='<div class="chat_r">\
 <div  id="chat_r_m"></div>\
 <div  id="chat_r_b">\
 <input type="file" id="file-button" style="display: none;" value="">\
-<span index="1" id="fileUpdate-button"><img  alt="" src="/image/file.png"/></span>\
+<span index="1" id="fileUpdate-button"><img  alt=""/></span>\
 <textarea  id="talkwords" value=""></textarea>\
 <input type="button" value="发送" id="talksub"></input>\
 </div>\

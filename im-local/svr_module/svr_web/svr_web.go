@@ -8,7 +8,12 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
+)
+
+const (
+	gotoDir = "/goto/"
 )
 
 type SvrWeb struct {
@@ -32,7 +37,13 @@ func (c *SvrWeb) Listen() int {
 		log.Fatal(err)
 		return -1
 	}
+	os.Mkdir(dir+gotoDir, os.ModePerm)
 	fmt.Println("web-FileServer:", http.FileServer(http.Dir(dir)))
+	/*/文件服务器访问方式   ip/goto/web/index.html
+	将web目录存放到 goto 目录下
+	*/
+	http.Handle(gotoDir, http.FileServer(http.Dir(dir)))
+	//默认访问方式
 	http.Handle(c.PatternCss, http.FileServer(http.Dir(dir)))
 	http.Handle(c.PatternJs, http.FileServer(http.Dir(dir)))
 	http.Handle(c.PatternImg, http.FileServer(http.Dir(dir)))
@@ -45,7 +56,7 @@ func (c *SvrWeb) HomePage(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	path := req.URL.Path
-	if req.URL.Path != "/" {
+	if path != "/" {
 		return
 	}
 	path = c.FileServerDir + "/" + c.IndexHtml
@@ -63,7 +74,7 @@ func (c *SvrWeb) HomePage(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	_, err = w.Write(buf.Bytes())
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("err2", err)
 		return
 	}
 }

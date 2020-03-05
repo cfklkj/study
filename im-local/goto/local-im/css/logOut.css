@@ -2,7 +2,7 @@ body{
     margin:0px;
     padding:0px;
     font-family:sans-serif;
-    background: url(/image/back.jpg);
+    background: url(../image/back.jpg);
     background-size:cover;
 }
 .logo {
@@ -13,6 +13,8 @@ body{
 .logo img { 
     width: 96px;
     height: 96px;
+    background-image: url(../image/exeIcon.png) ;
+    background-size: 96px 96px;
 }
 
 .box{

@@ -17,6 +17,8 @@
 #l_me img{
     width: 48px;
     height: 48px;
+    background-image: url(../image/me.png);
+    background-size: 48px 48px;
 }
 
 #l_me {
