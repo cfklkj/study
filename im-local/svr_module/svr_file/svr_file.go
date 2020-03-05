@@ -14,7 +14,7 @@ import (
 )
 
 type SvrFile struct {
-	PatternFileServer string //"/download"
+	PatternFileServer string //"/download/"
 	PatternUpfile     string //"/upload"
 	PatternLog        string //"/log"
 	PatternFriend     string //"/friend"
@@ -36,14 +36,14 @@ func (c SvrFile) Listen() int {
 	os.Mkdir(dir, os.ModePerm)
 	os.Mkdir(c.FileServerDir+c.PatternLog, os.ModePerm)
 	os.Mkdir(c.FileServerDir+c.PatternFileServer, os.ModePerm)
-	fmt.Println("FileServer:", dir)
-	http.Handle(c.PatternFileServer, http.FileServer(http.Dir(dir)))
-	http.HandleFunc(c.PatternUpfile, c.upload)                     //设置访问的路由
-	http.HandleFunc(c.PatternLog+"/select/count", c.logReadLen)    //设置访问的路由
-	http.HandleFunc(c.PatternLog+"/select/detail", c.logReadIndex) //设置访问的路由
-	http.HandleFunc(c.PatternLog+"/add", c.logWrite)               //设置访问的路由
-	http.HandleFunc(c.PatternFriend+"/add", c.friendWrite)         //设置访问的路由
-	http.HandleFunc(c.PatternFriend+"/select", c.friendRead)       //设置访问的路由
+	fmt.Println("file-FileServer:", dir)
+	http.Handle(c.PatternFileServer, http.FileServer(http.Dir(dir))) // dir 下的  PatternFileServer 目录
+	http.HandleFunc(c.PatternUpfile, c.upload)                       //设置访问的路由
+	http.HandleFunc(c.PatternLog+"/select/count", c.logReadLen)      //设置访问的路由
+	http.HandleFunc(c.PatternLog+"/select/detail", c.logReadIndex)   //设置访问的路由
+	http.HandleFunc(c.PatternLog+"/add", c.logWrite)                 //设置访问的路由
+	http.HandleFunc(c.PatternFriend+"/add", c.friendWrite)           //设置访问的路由
+	http.HandleFunc(c.PatternFriend+"/select", c.friendRead)         //设置访问的路由
 	return 0
 }
 

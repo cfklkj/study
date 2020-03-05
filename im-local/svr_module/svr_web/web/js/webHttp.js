@@ -75,7 +75,7 @@ var doHttp = imHttp.Method = {
             if (info.from == ""){
                 return
             }  
-            chatRight.addMsg(info.from, JSON.parse(util.unzip(info.data)))  
+            chatRight.addMsg(info.from, JSON.parse(util.unzip(info.data)), true)  
         } 
     },
     logAdd:function(msg){ 

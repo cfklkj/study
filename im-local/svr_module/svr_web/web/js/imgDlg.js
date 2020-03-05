@@ -26,7 +26,7 @@ var imgDlg = layoutImgDlg.Method = {
         body = JSON.parse(res)
         if (body.Code == 200){
            data = memHash.get(imDefine.mem_loginData)  
-           fileInfo ={"name":imgDlg.fileName,"path":data.downUrl + "/" + body.Data}
+           fileInfo ={"name":imgDlg.fileName,"path": body.Data}
            if (imgDlg.fileType.indexOf("image/") > -1) {
                 chatRight.send(actRecords.get(imDefine.act_selectContent),fileInfo, imDefine.chat_img) 
          }else{
@@ -37,8 +37,7 @@ var imgDlg = layoutImgDlg.Method = {
     sumitImageFile:function(base64Codes, fileType){   
         var formData = new FormData();   
         formData.append("uploadfile",imgDlg.convertBase64UrlToBlob(base64Codes, fileType));  //append函数的第一个参数是后台获取数据的参数名,和html标签的input的name属性功能相同  
-        data = memHash.get(imDefine.mem_loginData)  
-        doHttp.requestProx("POST",data.upUrl,formData, imgDlg.doneSubmit) 
+        doHttp.requestProx("POST","/upload",formData, imgDlg.doneSubmit) 
     },
     //convertBase64UrlToBlob函数是将base64编码转换为Blob  
     convertBase64UrlToBlob:function(urlData, fileType){  

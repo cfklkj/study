@@ -20,16 +20,13 @@ func main() {
 	}
 	svrtcp := svr_tcp.NewSvrTcp()
 	svrfile := svr_file.SvrFile{
-		PatternFileServer: "/download",
+		PatternFileServer: "/download/",
 		PatternUpfile:     "/upload",
 		PatternLog:        "/log",
 		PatternFriend:     "/friend",
 		FileServerDir:     "d:/www",
 		FormKey_up:        "uploadfile",
 	}
-	svrtcp.Listen()
-	svrweb.Listen()
-	svrfile.Listen()
 
 	host := "127.0.0.1:801"
 	if len(os.Args) > 1 {
@@ -39,5 +36,9 @@ func main() {
 		svrfile.FileServerDir = os.Args[2]
 	}
 	fmt.Println("eg:\n [ip:port] [fileSvrPath]\nstart:" + host)
+
+	svrtcp.Listen()
+	svrweb.Listen()
+	svrfile.Listen()
 	http.ListenAndServe(host, nil)
 }

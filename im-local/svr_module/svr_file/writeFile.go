@@ -36,19 +36,20 @@ func (c SvrFile) upload(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		fileName := fileHead.Filename
-		if fileName == "" {
+		if fileName == "" || fileName == "blob" {
 			fileName = c.randName(9, ".fly.db")
 		} else {
 			fileName += ".fly.db"
 		}
 		defer file.Close()
-		f, err := os.OpenFile(c.FileServerDir+fileName, os.O_WRONLY|os.O_CREATE, 0666)
+		localPath := c.FileServerDir + c.PatternFileServer + "/" + fileName
+		f, err := os.OpenFile(localPath, os.O_WRONLY|os.O_CREATE, 0666)
 		if err != nil {
-			c.sendBack(w, -3, "openFile:"+c.FileServerDir+fileName)
+			c.sendBack(w, -3, "openFile")
 			return
 		}
 		defer f.Close()
 		io.Copy(f, file)
-		c.sendBack(w, 200, fileName)
+		c.sendBack(w, 200, c.PatternFileServer+"/"+fileName)
 	}
 }

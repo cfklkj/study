@@ -32,7 +32,7 @@ func (c *SvrWeb) Listen() int {
 		log.Fatal(err)
 		return -1
 	}
-	fmt.Println("FileServer:", http.FileServer(http.Dir(dir)))
+	fmt.Println("web-FileServer:", http.FileServer(http.Dir(dir)))
 	http.Handle(c.PatternCss, http.FileServer(http.Dir(dir)))
 	http.Handle(c.PatternJs, http.FileServer(http.Dir(dir)))
 	http.Handle(c.PatternImg, http.FileServer(http.Dir(dir)))
