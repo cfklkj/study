@@ -93,6 +93,8 @@ func (c *SvrTcp) RouteMsg(con net.Conn, msg []byte) {
 		return
 	}
 	if v := c.login.GetCon(info.To); v != nil {
-		c.tcp.SendMsg(v.(net.Conn), msg)
+		if !c.tcp.SendMsg(v.(net.Conn), msg) {
+			c.loginOut(v.(net.Conn))
+		}
 	}
 }
