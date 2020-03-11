@@ -25,16 +25,18 @@ var titleLayout = layoutTitle.Method = {
         h4.innerText = msg
     },
     addBack:function(){
-        img = util.addEle("img")   
-        img.setAttribute("onclick", "clicks.back()")
-        this.main.appendChild(img)
-        this.back = img 
+        div = util.addEle("div")
+        div.setAttribute("onclick", "clicks.back()")
+        this.main.appendChild(div)
+        img = util.addEle("img")    
+        div.appendChild(img)
+        this.back = div 
         this.hideBack()
     },
     showBack:function(){
-        this.back.setAttribute("style","")
+        this.back.setAttribute("style","visibility:visible")
     },
     hideBack:function(){
-        this.back.setAttribute("style","display:none")
+        this.back.setAttribute("style","visibility:hidden")
     }
 }

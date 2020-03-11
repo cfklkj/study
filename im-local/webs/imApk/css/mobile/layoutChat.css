@@ -6,8 +6,8 @@
     top:140px;
     position: relative;
 }
-#chat textarea{
-    width: calc(100%  - 40px); 
+#chat textarea{ 
+    width: calc(100%  - 50px); 
     overflow:no;  
     margin: 18px 20px 0 20px;
     height: 140px; 
@@ -40,11 +40,13 @@
     top: -135px;
 }
 
-.edit span[index="1"] img{ 
+.edit span[index="1"] div{ 
     width: 52px;
     height: 52px;
     background-image: url(../../image/file.png);
     background-size: 52px 52px;
+    border: none;
+    margin:0px 10px 10px 10px;
 }
 .edit input[type='button'] {
     float: right;
@@ -104,7 +106,7 @@
     border-radius:20px;
     color:#fff;
     padding:10px 20px;
-    max-width: 468px; 
+    max-width: calc(100% - 150px); 
     padding-bottom: 20px; 
     padding-top: 18px;
     font-size: 32px;
@@ -127,7 +129,7 @@
     border-radius:20px;
     color:#fff;
     padding:10px 20px; 
-    max-width: 468px;
+    max-width: calc(100% - 150px); 
     padding-bottom: 20px; 
     padding-top: 18px;
     font-size: 32px;

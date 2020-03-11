@@ -59,7 +59,7 @@ var chatLayout = layoutChat.Method = {
     },
     addFileUpbutton:function(){
         var fileUps='<input onchange="imgDlg.changes(this)" type="file" id="file-button" style="display: none;" value="" />\
-        <span index="1" id="fileUpdate-button"><img  alt="" onclick="imgDlg.openDlg(\'file-button\')"/></span>'
+        <span index="1" id="fileUpdate-button" onclick="imgDlg.openDlg(\'file-button\')"><div></div><img  alt="" /></span>'
         return fileUps 
     },
     getEditInfo:function(){  
@@ -119,7 +119,7 @@ var chatLayout = layoutChat.Method = {
                 {
                     return
                 } 
-                htmls =  "<xmp>" + body.content + "</xmp>"  
+                htmls =  "<xmp ondblclick='util.copyData(this)'>" + body.content + "</xmp>"  
                 break; 
             case imDefine.chat_img:
                 htmls = '<div><img onclick="chatLayout.showImg(this)" alt="" src=' + body.content.path + ' name=' + body.content.name + '></img></div>'

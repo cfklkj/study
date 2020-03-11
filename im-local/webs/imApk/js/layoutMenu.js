@@ -24,6 +24,8 @@ var menuLayout = layoutMenu.Method = {
     addChats:function(){
         div = util.addEle("div")
         div.setAttribute("class", "chatsTag") 
+        dv = util.addEle("div")
+        div.appendChild(dv)
         img = util.addEle("img")
         div.appendChild(img)
         this.main.appendChild(div)
@@ -32,6 +34,8 @@ var menuLayout = layoutMenu.Method = {
         div = util.addEle("div")
         div.setAttribute("class", "user") 
         div.setAttribute("onclick", "clicks.selectContent('')") 
+        dv = util.addEle("div")
+        div.appendChild(dv)
         img = util.addEle("img")
         div.appendChild(img)
         this.main.appendChild(div)

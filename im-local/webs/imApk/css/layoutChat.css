@@ -98,7 +98,7 @@
     border-radius:10px;
     color:#fff;
     padding:5px 10px;
-    max-width: 468px; 
+    max-width: calc(100% - 150px); 
     padding-bottom: 10px; 
     padding-top: 9px;
     font-size: 16px;
@@ -121,7 +121,7 @@
     border-radius:10px;
     color:#fff;
     padding:5px 10px; 
-    max-width: 468px;
+    max-width: calc(100% - 150px); 
     padding-bottom: 10px; 
     padding-top: 9px;
     font-size: 16px;

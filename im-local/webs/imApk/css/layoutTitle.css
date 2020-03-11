@@ -15,5 +15,5 @@
     height: 48px;
     background-image: url("../image/back.png");
     background-size: 48px 48px;
-    transform: scaleX(-1);
+    transform: scaleX(-1); 
 }

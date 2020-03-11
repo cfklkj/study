@@ -10,10 +10,7 @@
 body{  
    margin: 0;
    padding: 0;
-}
-img{
-    border:0px;
-}
+} 
 #bodys{ 
     z-index: 1;
     width: 100%;

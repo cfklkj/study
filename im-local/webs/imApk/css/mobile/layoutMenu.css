@@ -14,11 +14,12 @@
     padding-top: 26px;
 }
 
-.chatsTag img{
+.chatsTag div{
     width: 96px;
     height: 96px;
     background-image: url("../../image/info.png");
     background-size: 96px 96px;
+    border: none;
 }
 
 .user {
@@ -26,9 +27,10 @@
     padding-top: 26px;
 }
 
-.user img{
+.user div{
     width: 96px;
     height: 96px;
     background-image: url("../../image/me.png");
     background-size: 96px 96px; 
+    border: none;
 }

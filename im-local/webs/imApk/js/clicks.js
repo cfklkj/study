@@ -43,9 +43,9 @@ var clicks = click.Method = {
      },
      back:function(){
         titleLayout.hideBack()
+        chatLayout.hide()
         menuLayout.show() 
         chatsLayout.show()
-        chatLayout.hide()
      },
      login:function(){
         username = loginLayout.getUserName()

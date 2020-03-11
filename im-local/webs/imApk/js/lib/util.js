@@ -207,6 +207,26 @@ var util = flyUtil.commonMethod  = {
             range.moveStart('character', pos);
             range.select();
         }
+    },
+    copyData:function(evt) {   
+        console.debug(evt.innerText)
+        var oInput = document.createElement('textarea');  //input 不支持换行
+
+        oInput.value = evt.innerText;
+
+        document.body.appendChild(oInput);
+
+        oInput.select(); // 选择对象
+
+        document.execCommand("Copy"); // 执行浏览器复制命令
+
+        //oInput.className = 'oInput';
+
+        oInput.style.display='none';
+
+        //alert('复制成功'); 
     }
 
 }   
+
+

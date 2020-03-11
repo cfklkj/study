@@ -40,6 +40,8 @@ var loginLayout = layoutLogin.Method = {
         div = util.addEle("div")
         div.setAttribute("class", this.div_login) 
         div.setAttribute("onclick", "clicks.login()") 
+        dv = util.addEle("div")
+        div.appendChild(dv)
         img = util.addEle("img")
         div.appendChild(img)
         this.main.appendChild(div) 
@@ -47,6 +49,8 @@ var loginLayout = layoutLogin.Method = {
     addLogoDiv:function(){ 
         div = util.addEle("div")
         div.setAttribute("class", this.div_logo) 
+        dv = util.addEle("div")
+        div.appendChild(dv)
         img = util.addEle("img")
         div.appendChild(img)
         this.main.appendChild(div)  
@@ -60,7 +64,7 @@ var loginLayout = layoutLogin.Method = {
     },
     userHtml:function(){
         var fileUps= '<div class="loginData">\
-        <span><img alt="" ></span>\
+        <span><div></div><img alt="" ></span>\
         <input id="user" required="" onchange="" \
         type="text" maxlength="11" placeholder="username" value=""/></div>'
          return fileUps 

@@ -13,7 +13,7 @@
     margin-top: 23px;
 }
 
-.title img{
+.title div{
     float: left;
     margin: 20px;
     width: 96px;
@@ -21,4 +21,5 @@
     background-image: url("../../image/back.png");
     background-size: 96px 96px;
     transform: scaleX(-1);
+    border:none;
 }
