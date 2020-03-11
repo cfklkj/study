@@ -15,7 +15,7 @@ func main() {
 		PatternCss:    "/css/",
 		PatternJs:     "/js/",
 		PatternImg:    "/image/",
-		FileServerDir: "./web",
+		FileServerDir: "./",
 		IndexHtml:     "index.html",
 	}
 	svrtcp := svr_tcp.NewSvrTcp()

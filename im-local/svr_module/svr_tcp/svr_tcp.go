@@ -75,10 +75,10 @@ func (c *SvrTcp) BroadMsg(con net.Conn, msg []byte) {
 		case net.Conn:
 			c.tcp.SendMsg(k.(net.Conn), msg)
 		default:
-			var info online
-			info.Online = k.(string)
-			bt, _ := json.Marshal(info)
 			if con != nil {
+				var info online
+				info.Online = k.(string)
+				bt, _ := json.Marshal(info)
 				c.tcp.SendMsg(con, bt)
 			}
 		}
